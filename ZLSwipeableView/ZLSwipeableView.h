@@ -91,6 +91,18 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 /// Center of swipable Views. This property is animated.
 @property (nonatomic) CGPoint swipeableViewsCenterInitial;
 
+// Make card-views DynamicItems
+@property (nonatomic) BOOL addDynamicItemBehavior;
+
+// Density to apply to cards
+@property (nonatomic) CGFloat density; 
+
+// Resistance to apply to cards
+@property (nonatomic) CGFloat resistance; 
+
+// Allow rotation of item cards
+@property (nonatomic) BOOL allowItemRotation; 
+
 /// Swiped views will be destroyed when they collide with this rect.
 @property (nonatomic) CGRect collisionRect;
 

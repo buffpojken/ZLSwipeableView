@@ -422,7 +422,7 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
                                                  location.y - 500, 1000, 1000)];
     [self.anchorView setBackgroundColor:[UIColor blueColor]];
     [self.anchorView setHidden:!self.isAnchorViewVisible];
-    [self.anchorContainerView addSubview:self.anchorView];
+    [self.anchorContainerView addSubview:self.anchorView];  
     UIAttachmentBehavior *attachToView =
         [self attachmentBehaviorThatAnchorsView:swipeableView
                                          toView:self.anchorView];
@@ -465,6 +465,14 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
                            toDirection:directionVector];
     [self.animator addBehavior:pushBehavior];
 
+    if(self.addDynamicItemBehavior){
+        UIDynamicItemBehavior *be = [[UIDynamicItemBehavior alloc] initWithItems:@[swipeableView]];
+        be.resistance = self.resistance;
+        be.density = self.density;
+        be.allowsRotation = self.allowItemRotation;
+        [self.animator addBehavior:be];
+    }
+
     [self.reuseCoverContainerView addSubview:self.anchorView];
     [self.reuseCoverContainerView addSubview:swipeableView];
     [self.reuseCoverContainerView sendSubviewToBack:swipeableView];
@@ -484,6 +492,13 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
     for (id aBehavior in self.animator.behaviors) {
         if ([aBehavior isKindOfClass:[UIAttachmentBehavior class]]) {
             NSArray *items = ((UIAttachmentBehavior *)aBehavior).items;
+            if ([items containsObject:item]) {
+                [self.animator removeBehavior:aBehavior];
+                [viewsToRemove addObjectsFromArray:items];
+            }
+        }
+        if ([aBehavior isKindOfClass:[UIDynamicItemBehavior class]]){
+            NSArray *items = ((UIDynamicItemBehavior*)aBehavior).items; 
             if ([items containsObject:item]) {
                 [self.animator removeBehavior:aBehavior];
                 [viewsToRemove addObjectsFromArray:items];
