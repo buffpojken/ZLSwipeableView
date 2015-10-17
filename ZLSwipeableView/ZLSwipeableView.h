@@ -94,6 +94,8 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 // Make card-views DynamicItems
 @property (nonatomic) BOOL addDynamicItemBehavior;
 
+@property (nonatomic) CGFloat snapDamping;
+
 // Density to apply to cards
 @property (nonatomic) CGFloat density; 
 

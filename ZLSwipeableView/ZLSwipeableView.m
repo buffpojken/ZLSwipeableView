@@ -93,6 +93,8 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
     self.pushVelocityMagnitude = 1000;
     self.escapeVelocityThreshold = 750;
     self.relativeDisplacementThreshold = 0.25;
+    self.snapDamping = 0.75f;
+
 
     self.programaticSwipeRotationRelativeYOffsetFromCenter = -0.2;
     self.swipeableViewsCenter =
@@ -374,7 +376,7 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
     }
     UISnapBehavior *snapBehavior =
         [[UISnapBehavior alloc] initWithItem:view snapToPoint:point];
-    snapBehavior.damping = 0.75f; /* Medium oscillation */
+    snapBehavior.damping = self.snapDamping;
     return snapBehavior;
 }
 
