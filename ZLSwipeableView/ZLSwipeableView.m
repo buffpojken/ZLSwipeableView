@@ -475,9 +475,9 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
         [self.animator addBehavior:be];
     }
 
-    // [self.reuseCoverContainerView addSubview:self.anchorView];
-    // [self.reuseCoverContainerView addSubview:swipeableView];
-    // [self.reuseCoverContainerView sendSubviewToBack:swipeableView];
+    [self.reuseCoverContainerView addSubview:self.anchorView];
+    [self.reuseCoverContainerView addSubview:swipeableView];
+    [self.reuseCoverContainerView sendSubviewToBack:swipeableView];
 
     self.anchorView = nil;
 
@@ -535,6 +535,7 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
                 [view removeGestureRecognizer:aGestureRecognizer];
             }
         }
+        NSLog(view.inspect)
         [view removeFromSuperview];
     }
 }
