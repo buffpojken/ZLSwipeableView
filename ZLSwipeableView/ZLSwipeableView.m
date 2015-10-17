@@ -535,7 +535,7 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
                 [view removeGestureRecognizer:aGestureRecognizer];
             }
         }
-        NSLog(view.inspect)
+        NSLog(@"discard");
         [view removeFromSuperview];
     }
 }
