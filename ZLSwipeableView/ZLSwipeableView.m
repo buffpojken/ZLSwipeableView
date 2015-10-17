@@ -475,7 +475,9 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
         [self.animator addBehavior:be];
     }
 
-
+    [self.reuseCoverContainerView addSubview:self.anchorView];
+    [self.reuseCoverContainerView addSubview:swipeableView];
+    [self.reuseCoverContainerView sendSubviewToBack:swipeableView];
 
     self.anchorView = nil;
 
@@ -570,7 +572,7 @@ int signum(CGFloat n) { return (n < 0) ? -1 : (n > 0) ? +1 : 0; }
     }
     if (nextView) {
         UIPanGestureRecognizer *recog = [[ZLPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        recog.delegate = self; 
+//        recog.delegate = self; 
         [nextView addGestureRecognizer:recog];
     }
     return nextView;
