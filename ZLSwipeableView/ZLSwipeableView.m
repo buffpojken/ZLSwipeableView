@@ -564,15 +564,17 @@ int signum(CGFloat n) { return (n < 0) ? -1 : (n > 0) ? +1 : 0; }
 }
 
 - (UIView *)nextSwipeableView {
-    UIView *nextView = nil;
+    ZLSwipeableItem *nextView = nil;
     if ([self.dataSource
             respondsToSelector:@selector(nextViewForSwipeableView:)]) {
         nextView = [self.dataSource nextViewForSwipeableView:self];
     }
     if (nextView) {
-        UIPanGestureRecognizer *recog = [[ZLPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        recog.delegate = self; 
-        [nextView addGestureRecognizer:recog];
+        if(![nextView isInert]){
+            UIPanGestureRecognizer *recog = [[ZLPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+            recog.delegate = self; 
+            [nextView addGestureRecognizer:recog];
+        }
     }
     return nextView;
 }
