@@ -579,7 +579,7 @@ int signum(CGFloat n) { return (n < 0) ? -1 : (n > 0) ? +1 : 0; }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)panGestureRecognizer {
     CGPoint velocity = [panGestureRecognizer velocityInView:self];
-    return fabs(velocity.y) < fabs(velocity.x);
+    return fabs(velocity.y) < fabs(velocity.x) && [self isUserInteractionEnabled];
 }
 
 - (void)rotateView:(UIView *)view
