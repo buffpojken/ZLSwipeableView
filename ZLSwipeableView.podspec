@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ZLSwipeableView"
-  s.version      = "0.0.20"
+  s.version      = "0.0.21"
   s.summary      = "A simple view for building card like interface like Tinder and Potluck."
   s.description  = <<-DESC
                    ZLSwipeableView is a simple view for building card like interface like Tinder and Potluck. It uses dataSource pattern and is highly customizable.

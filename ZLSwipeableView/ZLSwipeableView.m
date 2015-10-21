@@ -144,7 +144,7 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
     NSInteger numViews = self.containerView.subviews.count;
     NSMutableSet *newViews = [NSMutableSet set];
     for (NSInteger i = numViews; i < ZLPrefetchedViewsNumber; i++) {
-        UIView *nextView = [self nextSwipeableView];
+        UIView<ZLSwipeableItem> *nextView = [self nextSwipeableView];
         if (nextView) {
             [self.containerView addSubview:nextView];
             [self.containerView sendSubviewToBack:nextView];
@@ -563,14 +563,14 @@ int signum(CGFloat n) { return (n < 0) ? -1 : (n > 0) ? +1 : 0; }
     return collisionRect;
 }
 
-- (UIView *)nextSwipeableView {
-    ZLSwipeableItem *nextView = nil;
+- (UIView<ZLSwipeableItem> *)nextSwipeableView {
+    UIView<ZLSwipeableItem> *nextView = nil;
     if ([self.dataSource
             respondsToSelector:@selector(nextViewForSwipeableView:)]) {
         nextView = [self.dataSource nextViewForSwipeableView:self];
     }
     if (nextView) {
-        if(![nextView isInert]){
+        if([nextView isInert] == NO){
             UIPanGestureRecognizer *recog = [[ZLPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
             recog.delegate = self; 
             [nextView addGestureRecognizer:recog];

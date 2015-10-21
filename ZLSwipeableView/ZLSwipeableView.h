@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 @end
 
 
-@interface ZLSwipeableItem : UIView
+@protocol ZLSwipeableItem <NSObject>
     @property (nonatomic) BOOL isInert;
 @end
 
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, ZLSwipeableViewDirection) {
 @protocol ZLSwipeableViewDataSource <NSObject>
 
 @required
-- (ZLSwipeableItem *)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView;
+- (UIView<ZLSwipeableItem>*)nextViewForSwipeableView:(ZLSwipeableView *)swipeableView;
 @end
 
 @interface ZLSwipeableView : UIView
