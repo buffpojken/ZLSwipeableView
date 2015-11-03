@@ -365,7 +365,9 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
     UIPushBehavior *pushBehavior =
         [[UIPushBehavior alloc] initWithItems:@[ view ]
                                          mode:UIPushBehaviorModeInstantaneous];
-    pushBehavior.pushDirection = direction;
+    CGVector direction2 = CGVectorMake(direction.dx, 0);
+    pushBehavior.pushDirection = direction2;
+
     return pushBehavior;
 }
 
@@ -387,26 +389,26 @@ ZLDirectionVectorToSwipeableViewDirection(CGVector directionVector) {
     }
     CGPoint anchorPoint = anchorView.center;
     CGPoint p = [self convertPoint:aView.center toView:self];
+
     UIAttachmentBehavior *attachment = [[UIAttachmentBehavior alloc]
             initWithItem:aView
-        offsetFromCenter:UIOffsetMake(-(p.x - anchorPoint.x),
-                                      -(p.y - anchorPoint.y))
+        offsetFromCenter:UIOffsetMake(0,0)
           attachedToItem:anchorView
-        offsetFromCenter:UIOffsetMake(0, 0)];
+                                        offsetFromCenter:UIOffsetMake((p.x - anchorPoint.x),
+                                                                      (p.y - anchorPoint.y))];
     attachment.length = 0;
     return attachment;
 }
 
-- (UIAttachmentBehavior *)attachmentBehaviorThatAnchorsView:(UIView *)aView
+- (UIAttachmentBehavior *)attachmentBehaviorThatAnchorsView:(UIView *)aView 
                                                     toPoint:(CGPoint)aPoint {
     if (!aView) {
         return nil;
     }
 
-    CGPoint p = aView.center;
     UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc]
             initWithItem:aView
-        offsetFromCenter:UIOffsetMake(-(p.x - aPoint.x), -(p.y - aPoint.y))
+           offsetFromCenter:  UIOffsetMake(0,0)
         attachedToAnchor:aPoint];
     attachmentBehavior.damping = 100;
     attachmentBehavior.length = 0;
